@@ -37,8 +37,9 @@
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="200" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EPq-QD-QUF">
                                 <rect key="frame" x="0.0" y="44" width="375" height="376"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="recipeCell" id="LDn-pt-cUz" customClass="RecipeTableViewCell" customModule="PULS" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="200"/>
@@ -55,24 +56,20 @@
                                                         <constraint firstAttribute="width" constant="64" id="oNN-KN-kPb"/>
                                                     </constraints>
                                                 </imageView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="B53-0j-jT3">
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="top" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="B53-0j-jT3">
                                                     <rect key="frame" x="97" y="23" width="263" height="153.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RoI-3e-12d">
                                                             <rect key="frame" x="0.0" y="0.0" width="77" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
+                                                            <color key="textColor" red="0.27058823529999998" green="0.27058823529999998" blue="0.27058823529999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OyU-JN-Iit">
-                                                            <rect key="frame" x="0.0" y="20.5" width="263" height="133"/>
-                                                            <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis quis diam nulla. Vestibulum scelerisque lorem ac velit sagittis iaculis. Nullam hendrerit blandit libero, in pharetra dolor rhoncus iaculis. Phasellus vehicula pharetra egestas. Duis ornare luctus elit, sit amet consectetur elit posuere eget. In hac habitasse platea dictumst. Mauris sed risus id metus venenatis varius. Suspendisse eget orci sapien. Proin pharetra justo mauris, ac placerat lorem hendrerit vitae. Nullam a tempus purus. Cras suscipit, lectus vitae porta varius, ligula nisi dapibus nulla, ac dapibus libero sem nec nisl. Mauris bibendum tellus ut lacus volutpat molestie. Proin sodales, eros ut venenatis feugiat, massa quam sollicitudin tellus, et bibendum orci urna ultrices lorem. Suspendisse sed volutpat nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse potenti.
-In tincidunt, nulla in fermentum congue, lorem nunc mattis est, sit amet porttitor enim justo id arcu. Praesent porta eleifend ante eget sollicitudin. Vivamus ligula ex, accumsan eu ornare at, feugiat vel nulla. Pellentesque dapibus tempor dui, vel maximus libero vehicula et. Cras quis suscipit arcu, ac condimentum lectus. Fusce sit amet nulla finibus, ullamcorper arcu non, congue velit. Maecenas faucibus vitae ante in semper. Aenean vulputate blandit commodo. Vestibulum volutpat sit amet magna eu elementum. Mauris ornare augue urna, eu lobortis justo viverra quis. Nullam facilisis auctor tincidunt. Phasellus nec dignissim nibh.
-Etiam sed dui nulla. Nam eros felis, bibendum in consectetur ac, ornare id quam. Quisque placerat quam orci, dapibus accumsan magna aliquet faucibus. In quam urna, venenatis nec enim non, congue luctus nisl. Nullam egestas urna lacinia aliquam sollicitudin. Aenean convallis nunc quis magna egestas finibus. Interdum et malesuada fames ac ante ipsum primis in faucibus.
-Proin consectetur in erat eu congue. Nunc gravida, nisi vel ullamcorper congue, nisi urna interdum enim, vel porttitor sem massa eu eros. Nulla vel sagittis neque. Integer iaculis ante tellus, vel cursus sem accumsan in. Vestibulum et viverra orci, sed sollicitudin ex. Ut id purus ultrices, dapibus tellus ut, ultricies ante. Cras sem ipsum, fermentum dictum lectus eu, posuere auctor nulla. Sed tempus tristique magna, eget porta augue facilisis in. Nullam luctus accumsan pellentesque. Duis rutrum eu risus non iaculis.
-Vestibulum bibendum non nisl eget ultricies. Proin scelerisque, mi ut finibus tempus, dui felis bibendum dolor, vitae molestie lacus mi egestas neque. Curabitur sed mi congue, accumsan magna tincidunt, sodales tortor. Aliquam eget mi ultrices, efficitur augue id, pharetra dui. Vestibulum ultrices nisl sed sagittis consectetur. Mauris id efficitur nunc. Phasellus pellentesque ipsum orci, in venenatis ligula dapibus sed. Morbi sapien dolor, hendrerit non semper id, semper sit amet justo. Fusce vitae ex vitae lectus venenatis lobortis. Suspendisse lacinia lacus sit amet iaculis posuere. Vivamus cursus purus a eros porta gravida.</string>
+                                                            <rect key="frame" x="0.0" y="81.5" width="255.5" height="72"/>
+                                                            <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis quis diam nulla. Vestibulum scelerisque lorem ac velit sagittis iaculis.</string>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                            <nil key="textColor"/>
+                                                            <color key="textColor" red="0.27058823529411763" green="0.27058823529411763" blue="0.27058823529411763" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -88,7 +85,7 @@ Vestibulum bibendum non nisl eget ultricies. Proin scelerisque, mi ut finibus te
                                                 <constraint firstItem="B53-0j-jT3" firstAttribute="centerY" secondItem="3mv-SH-zKu" secondAttribute="centerY" id="epR-bc-mFk"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="0.79810573630136983" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <outlet property="ingredientsLabel" destination="OyU-JN-Iit" id="fmI-ZE-pSz"/>
                                             <outlet property="thumbnailImageView" destination="7cc-xt-n58" id="tFx-4w-6OS"/>
@@ -129,7 +126,7 @@ Vestibulum bibendum non nisl eget ultricies. Proin scelerisque, mi ut finibus te
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bqZ-7B-iPx" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" translucent="NO" id="Kzz-HO-COo">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="Kzz-HO-COo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.19215686274509802" green="0.52941176470588236" blue="0.086274509803921567" alpha="1" colorSpace="calibratedRGB"/>

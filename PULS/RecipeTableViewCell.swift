@@ -17,6 +17,8 @@ class RecipeTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         thumbnailImageView.layer.cornerRadius = thumbnailImageView.frame.height / 2.0
+        titleLabel.font = UIFont(name: "IowanOldStyle-Bold", size: 16.0)
+        ingredientsLabel.font = UIFont(name: "IowanOldStyle-Roman", size: 10.0)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

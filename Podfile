@@ -8,5 +8,6 @@ target 'PULS' do
   # Pods for PULS
 
   pod 'RealmSwift'
+  pod 'Alamofire'
 
 end
