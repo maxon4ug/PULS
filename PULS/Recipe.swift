@@ -13,6 +13,6 @@ class Recipe: Object {
     dynamic var title = ""
     dynamic var href = ""
     dynamic var ingredients = ""
-    dynamic var thumbnail = ""
+    dynamic var thumbnailData = Data()
     
 }

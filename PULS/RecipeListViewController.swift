@@ -11,17 +11,23 @@ import RealmSwift
 import Alamofire
 import SystemConfiguration
 
-class RecipeListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class RecipeListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     
     @IBOutlet weak var recipeListTableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var errorLabel: UILabel!
+    var searchActive = false
     let realm = try! Realm()
-    lazy var recipes: Results<Recipe> = { self.realm.objects(Recipe.self) }()
+    lazy var localRecipes: Results<Recipe> = { self.realm.objects(Recipe.self) }()
+    var searchedRecipes = Array<Recipe>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         recipeListTableView.rowHeight = UITableViewAutomaticDimension
-        recipeListTableView.estimatedRowHeight = 100
+        recipeListTableView.estimatedRowHeight = 104
         recipeListTableView.tableFooterView = UIView(frame: CGRect.zero)
+        errorLabel.font = UIFont(name: "Iowan Old Style", size: 17.0)
+        //        recipeListTableView.addGestureRecognizer(UIGestureRecognizer(target: self, action: #selector(self.hideSearchBarKeyboard(_:))))
         fetchData()
     }
     
@@ -33,48 +39,143 @@ class RecipeListViewController: UIViewController, UITableViewDataSource, UITable
                 print("Error: \(response.result.error?.localizedDescription ?? "Wrong casting")")
                 return
             }
-            guard recipes.count != self.recipes.count else { return }
+            guard recipes.count != self.localRecipes.count else { return }
             for recipe in recipes {
                 let newRecipe = Recipe()
                 newRecipe.title = recipe["title"]!.trimmingCharacters(in: .whitespacesAndNewlines)
                 newRecipe.ingredients = recipe["ingredients"]!
                 newRecipe.href = recipe["href"]!
-                newRecipe.thumbnail = recipe["thumbnail"] ?? ""
-                if self.realm.objects(Recipe.self).filter("href = '\(newRecipe.href)'").count == 0 {
-                    try! self.realm.write {
-                        self.realm.add(newRecipe)
+                Alamofire.request(recipe["thumbnail"]!).responseData { response in
+                    newRecipe.thumbnailData = response.result.value ?? Data()
+                    if self.realm.objects(Recipe.self).filter("href = '\(newRecipe.href)'").count == 0 {
+                        try! self.realm.write {
+                            self.realm.add(newRecipe)
+                        }
+                        self.localRecipes = self.realm.objects(Recipe.self)
+                        self.recipeListTableView.reloadData()
                     }
                 }
             }
         })
-        recipes = realm.objects(Recipe.self)
-        recipeListTableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recipes.count
+        switch searchActive {
+        case true:
+            if searchedRecipes.count == 0 {
+                if isInternetAvailable() == false {
+                    errorLabel.text = "Oops! Seems like there's no Internet connection :("
+                } else {
+                    errorLabel.text = "Oops! Seems like there's no recipes here :("
+                }
+                errorLabel.isHidden = false
+            } else {
+                errorLabel.isHidden = true
+            }
+            return searchedRecipes.count
+        case false:
+            if localRecipes.count == 0 {
+                if isInternetAvailable() == false {
+                    errorLabel.text = "Oops! Seems like there's no Internet connection and your local database is empty yet:("
+                    errorLabel.isHidden = false
+                }
+            } else {
+                errorLabel.isHidden = true
+            }
+            return localRecipes.count
+        default: break
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "recipeCell") as! RecipeTableViewCell
-        let recipe = recipes[indexPath.row]
+        let recipe: Recipe
+        if searchActive == false {
+            recipe = localRecipes[indexPath.row]
+        } else {
+            recipe = searchedRecipes[indexPath.row]
+        }
         cell.titleLabel.text = recipe.title
-        cell.ingredientsLabel.text = recipe.ingredients
-        Alamofire.request(recipe.thumbnail).responseData { response in
-            guard let data = response.result.value, let image = UIImage(data: data) else {
-                cell.thumbnailImageView.image = #imageLiteral(resourceName: "nophoto")
-                return
-            }
+        cell.ingredientsLabel.text = recipe.ingredients.capitalized
+        if let image = UIImage(data: recipe.thumbnailData) {
             cell.thumbnailImageView.image = image
+        } else {
+            cell.thumbnailImageView.image = #imageLiteral(resourceName: "nophoto")
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let urlString = recipes[indexPath.row].href
+        let urlString: String
+        if searchActive == false {
+            urlString = localRecipes[indexPath.row].href
+        } else {
+            urlString = searchedRecipes[indexPath.row].href
+        }
         guard let url = URL(string: urlString), isInternetAvailable() == true else { return }
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchActive = true
+        searchBar.showsCancelButton = true
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchActive = false
+        searchBar.showsCancelButton = false
+        searchBar.resignFirstResponder()
+        recipeListTableView.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false
+        searchBar.text = ""
+        searchBar.showsCancelButton = false
+        searchBar.resignFirstResponder()
+        recipeListTableView.reloadData()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        searchActive = true
+        self.recipeListTableView.reloadData()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard isInternetAvailable() == true else {
+            recipeListTableView.reloadData()
+            return
+        }
+        Alamofire.request("http://www.recipepuppy.com/api/", parameters: ["q":searchText]).responseJSON(completionHandler: { response in
+            self.searchedRecipes.removeAll()
+            guard let json = response.result.value as? [String:Any], let recipes = json["results"] as? [[String:String]] else {
+                print("Error: \(response.result.error?.localizedDescription ?? "Wrong casting")")
+                return
+            }
+            guard recipes.count != 0 else {
+                self.recipeListTableView.reloadData()
+                return
+            }
+            for recipe in recipes {
+                let newRecipe = Recipe()
+                newRecipe.title = recipe["title"]!.trimmingCharacters(in: .whitespacesAndNewlines)
+                newRecipe.ingredients = recipe["ingredients"]!
+                newRecipe.href = recipe["href"]!
+                Alamofire.request(recipe["thumbnail"]!).responseData { response in
+                    newRecipe.thumbnailData = response.result.value ?? Data()
+                    self.searchedRecipes.append(newRecipe)
+                    self.recipeListTableView.reloadData()
+                }
+            }
+        })
+    }
+    
+    func hideSearchBarKeyboard(_ sender: Any?) {
+        if searchActive == true {
+            searchBar.resignFirstResponder()
+        }
     }
     
     func isInternetAvailable() -> Bool
