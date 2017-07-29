@@ -1,26 +1,154 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bqZ-7B-iPx">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Recipe labs-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="RecipeListViewController" customModule="PULS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="9lv-as-Ni6">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <color key="barTintColor" red="0.19215686269999999" green="0.52941176469999995" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pug" translatesAutoresizingMaskIntoConstraints="NO" id="7ou-QU-YSK">
+                                <rect key="frame" x="139" y="382" width="231" height="221"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="221" id="bkU-vC-w5e"/>
+                                    <constraint firstAttribute="width" constant="231" id="psg-er-332"/>
+                                </constraints>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="200" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EPq-QD-QUF">
+                                <rect key="frame" x="0.0" y="44" width="375" height="376"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="recipeCell" id="LDn-pt-cUz" customClass="RecipeTableViewCell" customModule="PULS" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="200"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LDn-pt-cUz" id="3mv-SH-zKu">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7cc-xt-n58">
+                                                    <rect key="frame" x="23" y="68" width="64" height="64"/>
+                                                    <color key="backgroundColor" red="0.19215686269999999" green="0.52941176469999995" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="7cc-xt-n58" secondAttribute="height" multiplier="1:1" id="mw5-Kb-tFJ"/>
+                                                        <constraint firstAttribute="width" constant="64" id="oNN-KN-kPb"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="B53-0j-jT3">
+                                                    <rect key="frame" x="97" y="23" width="263" height="153.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RoI-3e-12d">
+                                                            <rect key="frame" x="0.0" y="0.0" width="77" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OyU-JN-Iit">
+                                                            <rect key="frame" x="0.0" y="20.5" width="263" height="133"/>
+                                                            <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis quis diam nulla. Vestibulum scelerisque lorem ac velit sagittis iaculis. Nullam hendrerit blandit libero, in pharetra dolor rhoncus iaculis. Phasellus vehicula pharetra egestas. Duis ornare luctus elit, sit amet consectetur elit posuere eget. In hac habitasse platea dictumst. Mauris sed risus id metus venenatis varius. Suspendisse eget orci sapien. Proin pharetra justo mauris, ac placerat lorem hendrerit vitae. Nullam a tempus purus. Cras suscipit, lectus vitae porta varius, ligula nisi dapibus nulla, ac dapibus libero sem nec nisl. Mauris bibendum tellus ut lacus volutpat molestie. Proin sodales, eros ut venenatis feugiat, massa quam sollicitudin tellus, et bibendum orci urna ultrices lorem. Suspendisse sed volutpat nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse potenti.
+In tincidunt, nulla in fermentum congue, lorem nunc mattis est, sit amet porttitor enim justo id arcu. Praesent porta eleifend ante eget sollicitudin. Vivamus ligula ex, accumsan eu ornare at, feugiat vel nulla. Pellentesque dapibus tempor dui, vel maximus libero vehicula et. Cras quis suscipit arcu, ac condimentum lectus. Fusce sit amet nulla finibus, ullamcorper arcu non, congue velit. Maecenas faucibus vitae ante in semper. Aenean vulputate blandit commodo. Vestibulum volutpat sit amet magna eu elementum. Mauris ornare augue urna, eu lobortis justo viverra quis. Nullam facilisis auctor tincidunt. Phasellus nec dignissim nibh.
+Etiam sed dui nulla. Nam eros felis, bibendum in consectetur ac, ornare id quam. Quisque placerat quam orci, dapibus accumsan magna aliquet faucibus. In quam urna, venenatis nec enim non, congue luctus nisl. Nullam egestas urna lacinia aliquam sollicitudin. Aenean convallis nunc quis magna egestas finibus. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+Proin consectetur in erat eu congue. Nunc gravida, nisi vel ullamcorper congue, nisi urna interdum enim, vel porttitor sem massa eu eros. Nulla vel sagittis neque. Integer iaculis ante tellus, vel cursus sem accumsan in. Vestibulum et viverra orci, sed sollicitudin ex. Ut id purus ultrices, dapibus tellus ut, ultricies ante. Cras sem ipsum, fermentum dictum lectus eu, posuere auctor nulla. Sed tempus tristique magna, eget porta augue facilisis in. Nullam luctus accumsan pellentesque. Duis rutrum eu risus non iaculis.
+Vestibulum bibendum non nisl eget ultricies. Proin scelerisque, mi ut finibus tempus, dui felis bibendum dolor, vitae molestie lacus mi egestas neque. Curabitur sed mi congue, accumsan magna tincidunt, sodales tortor. Aliquam eget mi ultrices, efficitur augue id, pharetra dui. Vestibulum ultrices nisl sed sagittis consectetur. Mauris id efficitur nunc. Phasellus pellentesque ipsum orci, in venenatis ligula dapibus sed. Morbi sapien dolor, hendrerit non semper id, semper sit amet justo. Fusce vitae ex vitae lectus venenatis lobortis. Suspendisse lacinia lacus sit amet iaculis posuere. Vivamus cursus purus a eros porta gravida.</string>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="7cc-xt-n58" firstAttribute="leading" secondItem="3mv-SH-zKu" secondAttribute="leadingMargin" constant="15" id="43V-0N-cqu"/>
+                                                <constraint firstAttribute="trailing" secondItem="B53-0j-jT3" secondAttribute="trailing" constant="15" id="CQ9-Rf-ZFh"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="B53-0j-jT3" secondAttribute="bottom" constant="15" id="EZG-Gi-Krd"/>
+                                                <constraint firstItem="B53-0j-jT3" firstAttribute="top" secondItem="3mv-SH-zKu" secondAttribute="topMargin" constant="15" id="NgD-iW-hp9"/>
+                                                <constraint firstItem="B53-0j-jT3" firstAttribute="leading" secondItem="7cc-xt-n58" secondAttribute="trailing" constant="10" id="Xoo-a1-R5L"/>
+                                                <constraint firstItem="7cc-xt-n58" firstAttribute="centerY" secondItem="3mv-SH-zKu" secondAttribute="centerY" id="ckb-Bo-B2d"/>
+                                                <constraint firstItem="B53-0j-jT3" firstAttribute="centerY" secondItem="3mv-SH-zKu" secondAttribute="centerY" id="epR-bc-mFk"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <outlet property="ingredientsLabel" destination="OyU-JN-Iit" id="fmI-ZE-pSz"/>
+                                            <outlet property="thumbnailImageView" destination="7cc-xt-n58" id="tFx-4w-6OS"/>
+                                            <outlet property="titleLabel" destination="RoI-3e-12d" id="8Ek-jT-nSA"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="zAQ-xn-d2U"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="jpC-kh-u3j"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="7ou-QU-YSK" secondAttribute="bottom" id="DwS-3U-Tae"/>
+                            <constraint firstItem="EPq-QD-QUF" firstAttribute="top" secondItem="9lv-as-Ni6" secondAttribute="bottom" id="E6O-n6-7L5"/>
+                            <constraint firstItem="9lv-as-Ni6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="HMe-bi-1Zi"/>
+                            <constraint firstAttribute="trailing" secondItem="EPq-QD-QUF" secondAttribute="trailing" id="UbE-Uv-rFy"/>
+                            <constraint firstItem="EPq-QD-QUF" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="bgV-97-MgJ"/>
+                            <constraint firstAttribute="trailing" secondItem="9lv-as-Ni6" secondAttribute="trailing" id="c5J-cC-eie"/>
+                            <constraint firstAttribute="trailing" secondItem="7ou-QU-YSK" secondAttribute="trailing" constant="5" id="iNo-xU-klh"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="EPq-QD-QUF" secondAttribute="bottom" id="r4Y-hZ-wEA"/>
+                            <constraint firstItem="9lv-as-Ni6" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="yIo-O8-yLf"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Recipe labs" id="3OM-Sf-upb"/>
+                    <connections>
+                        <outlet property="recipeListTableView" destination="EPq-QD-QUF" id="V94-hT-8GT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1076" y="137.18140929535232"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="B2o-Hk-6vF">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bqZ-7B-iPx" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" translucent="NO" id="Kzz-HO-COo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.19215686274509802" green="0.52941176470588236" blue="0.086274509803921567" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="xhE-w1-ckY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dSV-bo-5fL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="263" y="137"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="pug" width="231" height="221"/>
+    </resources>
 </document>
